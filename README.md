@@ -7,9 +7,26 @@
   <br>
 </h3>
 
+<br/><br/>
+
+<h1 align="center">
+  Requirements to install the project
+</h1>
+
+<p>
+  1º: Node <a href='https://nodejs.org/en/'> Install </a> <br/>
+
+  2º: VScode <a href='https://code.visualstudio.com/download'> Install </a> <br/>
+
+  3º: Git <a href='https://git-scm.com/downloads'> Install </a> <br/>
+</p>
+
+<br/><br/>
+
 <h1 align="center">
   Project
 </h1>
+
 
 <img src="./Front/src/assets/Captura de tela 2022-11-16 121138.png" />
 
