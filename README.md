@@ -10,7 +10,7 @@
 <br/><br/>
 
 <h1 align="center">
-  Requirements to install the project
+  📥 Requirements to install the project
 </h1>
 
 <p>
@@ -24,7 +24,7 @@
 <br/><br/>
 
 <h1 align="center">
-  Project
+  🖋️ Project
 </h1>
 
 
@@ -33,7 +33,7 @@
 <br/><br/>
 
 <h1 align="center">
-  Isaac Moretão
+  🙋‍♂️ Isaac Moretão 
 </h1>
 
 <p align="center">
