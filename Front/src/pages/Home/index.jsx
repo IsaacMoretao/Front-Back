@@ -1,52 +1,59 @@
-import { FiPlus } from "react-icons/fi"
-import { Link } from "react-router-dom"
+import { Container, Content, NewMovie, ItemList } from './style'
 
-import { Container } from "./styles"
-import { Header } from "../../components/Header"
-import { FilmNote } from "../../components/FilmNote"
+import { useNavigate } from 'react-router-dom'
+import { AiOutlinePlus } from 'react-icons/ai'
 
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { api } from "../../services/api"
+import { useMovies } from '../../hooks/movies'
+
+import { Header } from '../../components/Header'
+import { Tag } from '../../components/Tag'
+import { Ratings } from '../../components/Ratings'
 
 export function Home() {
-  const [movies, setMovies] = useState([])
-  const [search, setSearch] = useState("")
-  const [tagSelected, setTagSelected] = useState("")
+  const { movies } = useMovies();
 
-  useEffect(() => {
-    async function fetchMovies() {
-      const response = await api.get(`/movies_notes?title=${search}&tags=${tagSelected}`)
-      setMovies(response.data)
-    }
-    fetchMovies()
+  const navigate = useNavigate()
 
-  }, [search])
+  function handleDetails(id) {
+    navigate(`/details/${id}`)
+  }
 
   return (
     <Container>
-      <Header onChange={(e) => setSearch(e.target.value)} />
-
+      <Header/>
       <main>
-        <header>
-          <h1>Meus filmes</h1>
-          <Link to="/new" >
-            <FiPlus />
-            Adicionar filme
-          </Link>
-        </header>
-
-        <section>
-          {
-            movies.map((movie, index) => (
-              <FilmNote
-                key={String(index)}
-                data={movie}
-                to={`/preview/${movie.id}`}
-              />
-            ))
-          }
-        </section>
+        <Content>
+          <div className='myMovies'>
+            <strong>Meus filmes</strong>
+            <NewMovie to='/new'>
+              <AiOutlinePlus/>
+              Adicionar filme
+            </NewMovie>
+          </div>
+          <div className='list'>
+            {
+              movies.map(movie => (             
+                <ItemList
+                  key={String(movie.id)}
+                  onClick={() => handleDetails(movie.id)}
+                >
+                    <h2>{movie.title}</h2>
+                    <div>
+                      <Ratings rate={movie.ratings}/>
+                    </div>
+                    <p>{movie.description}</p>
+                    {
+                      movie.tags.map(tag => (
+                        <Tag 
+                          key={String(tag.id)}
+                          title={tag.name}/>
+                      ))
+                    }
+                </ItemList>
+              ))
+            }
+          </div>
+        </Content>
       </main>
     </Container>
   )

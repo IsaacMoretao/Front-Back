@@ -1,17 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import {Link} from "react-router-dom"
+export const Container = styled.button`
+  background: none;
+  border: none;
 
-export const Container = styled(Link)`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 21px;
-
+  font-size: 1.6rem;
   color: ${({ theme }) => theme.COLORS.PINK};
 
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
+
+  > svg {
+    margin-right: 1rem;
+  }
 `

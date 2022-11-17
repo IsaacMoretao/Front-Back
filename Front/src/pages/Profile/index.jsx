@@ -1,44 +1,44 @@
-import { FiArrowLeft, FiCamera, FiMail, FiLock, FiUser } from "react-icons/fi"
+import { Container, Form, Avatar } from './styles'
 
-import { Container, Avatar, Form } from "./styles"
-import { ButtonText } from "../../components/ButtonText"
-import { Input } from "../../components/Input"
-import { Button } from "../../components/Button"
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
-import { useAuth } from "../../hooks/auth"
+import { useState } from 'react'
+import { AiOutlineArrowLeft, AiOutlineUserAdd, AiOutlineMail, AiOutlineUnlock, AiOutlineLock, AiOutlineCamera } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useAuth } from '../../hooks/auth'
+import { api } from '../../services/api'
 
-import avatarPlaceHolder from "../../assets/avatar_placeholder.svg"
-import {api} from "../../services/api"
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { ButtonText } from '../../components/ButtonText'
 
 export function Profile() {
-  const { updateProfile, user } = useAuth()
+  const { user, updateProfile} = useAuth()
 
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
-  const [password, setPassword] = useState("")
-  const [old_password, setOldPassword] = useState("")
+  const [passwordOld, setPasswordOld] = useState()
+  const [passwordNew, setPasswordNew] = useState()
+
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+
+  const [avatar, setAvatar] = useState(avatarUrl)
+  const [avatarFile, setAvatarFile] = useState(null)
 
   const navigate = useNavigate()
 
-  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceHolder
-  const [avatar, setAvatar] = useState(avatarURL)
-  const [avatarFile, setAvatarFile] = useState(null)
-
-  async function handleClick() {
+  async function handleUpdate() {
     const updated = {
       name,
-      email, 
-      password,
-      old_password 
+      email,
+      old_password: passwordOld,
+      password: passwordNew
     }
 
     const userUpdated = Object.assign(user, updated)
-    
-    await updateProfile({user: userUpdated, avatarFile})
-    navigate("/")
+
+    await updateProfile({ user: userUpdated, avatarFile })
   }
 
   function handleChangeAvatar(event) {
@@ -49,38 +49,62 @@ export function Profile() {
     setAvatar(imagePreview)
   }
 
+  function handleBack() {
+    navigate(-1)
+  }
+
   return (
     <Container>
-      <div>
-        <ButtonText href={"/"} title={"Voltar"} icon={FiArrowLeft} />
-      </div>
-
-      <Avatar>
-        <img
-          src={avatar}
-          alt="Foto de usuário"
-        />
-
-        <label htmlFor="avatar">
-          <FiCamera />
-
-          <input
-            id="avatar"
-            type="file"
-            onChange={handleChangeAvatar}
-          />
-        </label>
-      </Avatar>
+      <header>
+        <div className='btnBack'>
+            <AiOutlineArrowLeft/>
+            <ButtonText 
+              title='Voltar' 
+              onClick={handleBack}>
+            </ButtonText>
+          </div>
+      </header>
 
       <Form>
-        <Input icon={FiUser} value={name} onChange={e => setName(e.target.value)}/>
-        <Input icon={FiMail} value={email} onChange={e => setEmail(e.target.value)}/>
-        <Input icon={FiLock} placeholder={"Senha atual"} onChange={e => setOldPassword(e.target.value)} type="password"/>
-        <Input icon={FiLock} placeholder={"Nova senha"} onChange={e => setPassword(e.target.value)} type="password"/>
-        <Button title={"Salvar"} onClick={handleClick} />
-
+        <Avatar>
+          <img src={avatar} alt='Foto do usuário' />
+          <label htmlFor='avatar'>
+            <AiOutlineCamera/>
+            <input 
+              id='avatar' 
+              type='file'
+              onChange={handleChangeAvatar}
+            />
+          </label>
+        </Avatar>
+        <Input 
+          placeholder='Nome do usuário'
+          icon={AiOutlineUserAdd} 
+          type='text'
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+        <Input 
+          placeholder='E-mail do usuário'
+          icon={AiOutlineMail} 
+          type='text'
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <Input 
+          placeholder='Senha atual'
+          icon={AiOutlineUnlock} 
+          type='password'
+          onChange={e => setPasswordOld(e.target.value)}
+        />
+        <Input 
+          placeholder='Nova senha'
+          icon={AiOutlineLock} 
+          type='password' 
+          onChange={e => setPasswordNew(e.target.value)}
+        />
+        <Button title='Salvar' onClick={handleUpdate}/>
       </Form>
-
     </Container>
   )
 }

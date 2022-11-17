@@ -1,64 +1,87 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
-  > div:nth-child(1) {
-    padding: 0 120px;
+
+  > header {
     width: 100%;
-    height: 124px;
-    background: rgba(255, 133, 155, 0.05);
+    height: 14.4rem;
+
+    background-color: ${({ theme }) => theme.COLORS.BG_PINK};
+    color: ${({ theme }) => theme.COLORS.PINK};
+
     display: flex;
-    div {
-      justify-content: flex-start;
+    align-items: center;
+
+    padding: 0 12.4rem;
+
+    .btnBack {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .8rem;
+
+      font-size: 2rem;
+      color: ${({ theme }) => theme.COLORS.PINK};
     }
   }
 `
 
-export const Avatar = styled.div`
-    position: relative;
-    margin: -124px auto 32px;
-    
-    width: 186px;
-    height: 186px;
-    display: flex;
-    justify-content: center;
-    > img {
-        border-radius: 50%;
-        width: 170px;
-        height: 170px;
-        margin-top: 10px;
-    }
-    > label {
-        width: 48px;
-        height: 48px;
-        
-        background: ${({theme}) => theme.COLORS.PINK};
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        bottom: 7px;
-        right: 7px;
-        cursor: pointer;
-        input {
-            display:none;
-        }
-        svg {
-            width: 20px;
-            height: 20px;
-            color: ${({theme}) => theme.COLORS.BACKGROUND_800};;
-        }
-    }
+export const Form = styled.form`
+  max-width: 34rem;
+  margin: 3rem auto 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+
+  div > svg {
+    margin-left: .8rem;
+  }
+
+  div:nth-child(4) {
+    margin-top: 2.4rem;
+  }
 `
 
-export const Form = styled.form`
-  width: 340px;
-  
-  margin: auto;
-  
-  >div:nth-child(2) {
-    margin-bottom: 24px;
+export const Avatar = styled.div`
+  position: relative;
+  margin: -12.4rem auto 3.2rem;
+
+  width: 18.6rem;
+  height: 18.6rem;
+
+  > img {
+    width: 18.6rem;
+    height: 18.6rem;
+    border-radius: 50%;
+  }
+
+  > label {
+    width: 4.8rem;
+    height: 4.8rem;
+
+    background-color: ${({ theme }) => theme.COLORS.PINK};
+    color: ${({ theme }) => theme.COLORS.GRAY_200};
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+
+    cursor: pointer;
+
+    > input {
+      display: none;
+    }
+
+    > svg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
   }
 `

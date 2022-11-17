@@ -1,64 +1,68 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Container = styled.div`
+import { Link } from 'react-router-dom'
+
+export const Container = styled.header`
   grid-area: header;
 
   width: 100%;
-  height: 124px;
+  height: 11.6rem;
 
-  padding: 0 70px;
-
-  border-bottom: 1px solid;
-  border-color: ${({ theme }) => theme.COLORS.GRAY_300};
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: ${({ theme }) => theme.COLORS.GRAY_200};
 
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  gap: 50px;
+  gap: 1rem;
+  padding: 0 8rem;
 
-  >a {
+  > h1 {
     font-weight: 700;
-    font-size: 24px;
-    line-height: 32px;
-    color: ${({ theme }) => theme.COLORS.PINK};
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+
+    color: ${({ theme }) => theme.COLORS.PINK} ;
   }
-`
 
-export const Profile = styled.div`
-  width: 180px;
-  height: 70px;
+  > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-  display: flex;
-  justify-content: center;
-  gap: 9px;
-
-  >div {
-    width: 160px;
+    > div {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: center;
 
-    a:nth-child(1) {
-      color: ${({ theme }) => theme.COLORS.WHITE};
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 18px;
+    margin-right: 2rem;
+    line-height: 2rem;
+
+      strong {
+        font-size: 1.4rem;
+        color: ${({ theme }) => theme.COLORS.WHITE};
+      }
     }
-
-    a:nth-child(2) {
-      color: ${({ theme }) => theme.COLORS.GRAY_100};
-      font-size: 14px;
-      line-height: 18px;
-    }
-
   }
-  >img {
-    width: 64px;
-    height: 64px;
+`
 
-    border: 1px solid;
-    border-color: ${({ theme }) => theme.COLORS.GRAY_300};
-    border-radius: 35px;
+export const Profile = styled(Link)`
+  display: flex;
+  align-items: center;
+
+  > img {
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 50%;
   }
+`
+
+export const Button = styled.button`
+  border: none;
+  background: none;
+
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.COLORS.GRAY_100};
 `

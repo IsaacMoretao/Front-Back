@@ -1,58 +1,62 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import backgroundImg from '../../assets/background.jpg'
+import backgroundImg from '../../assets/background.png'
 
 export const Container = styled.div`
-  width: 100%;
   height: 100vh;
-  
+
   display: flex;
-  flex-direction: row;
-  
   align-items: stretch;
-  
+`
 
-  >div {
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    justify-content: center;
-    
-    padding: 100px;
+export const Form = styled.form`
+  padding: 0 136px;
 
-    h1 {
-      font-weight: 700;
-      font-size: 48px;
-      line-height: 63px;
-      color: ${({ theme }) => theme.COLORS.PINK};
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 
-    p {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 18px;
-      color: ${({ theme }) => theme.COLORS.WHITE}; 
-    }
-    
-    h2 {
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 32px;
-      color: ${({ theme }) => theme.COLORS.WHITE};
+  text-align: center;
 
-      margin: 48px 0 48px 0;
-    }
-    
-    a {
-      margin-top: 42px;
-      text-align: center;
-    }
+  > h1 {
+    font-weight: 700;
+    font-size: 4.8rem;
+    line-height: 6.3rem;
+
+    color: ${({ theme }) => theme.COLORS.PINK};
   }
 
+  > p {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2rem;
+
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
+  }
+
+  > h2 {
+    margin: 4.8rem 0;
+
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 3rem;
+
+    color: ${({ theme }) => theme.COLORS.WHITE};
+  }
+
+  > div {
+    margin-top: .8rem;
+  }
+
+  > a {
+    margin: 5rem 12rem;
+    color: ${({ theme }) => theme.COLORS.PINK};
+  }
 `
 
 export const Background = styled.div`
   flex: 1;
   background: url(${backgroundImg}) no-repeat center center;
-  background-size: cover;
+  background-size: cover; 
 `

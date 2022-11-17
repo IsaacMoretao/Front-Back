@@ -1,60 +1,68 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import backgroundImg from '../../assets/background.jpg'
+import backgroundImg from '../../assets/background.png'
 
 export const Container = styled.div`
-  width: 100%;
   height: 100vh;
 
   display: flex;
-  flex-direction: row;
   align-items: stretch;
-  
-  >div {
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    justify-content: center;
-    
-    padding: 100px;
+`
 
-    h1 {
-      font-weight: 700;
-      font-size: 48px;
-      line-height: 63px;
-      color: ${({ theme }) => theme.COLORS.PINK};
-    }
+export const Form = styled.form`
+  padding: 0 136px;
 
-    p {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 18px;
-      color: ${({ theme }) => theme.COLORS.WHITE}; 
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 
-    h2 {
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 32px;
-      color: ${({ theme }) => theme.COLORS.WHITE};
+  text-align: center;
 
-      margin: 48px 0 48px 0;
-    }
-    
-    button {
-      margin-bottom: 42px;
-    }
+  > h1 {
+    font-weight: 700;
+    font-size: 4.8rem;
+    line-height: 6.3rem;
 
-    a {
-      justify-content: center;
-      align-items: center;
-    }
+    color: ${({ theme }) => theme.COLORS.PINK};
   }
 
+  > p {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2rem;
+
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
+  }
+
+  > h2 {
+    margin: 4.8rem 0;
+
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 3rem;
+
+    color: ${({ theme }) => theme.COLORS.WHITE};
+  }
+
+  > div {
+    margin-top: .8rem;
+  }
+
+  .btnBack {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+
+      font-size: 1.7rem;
+      color: ${({ theme }) => theme.COLORS.PINK};
+
+      margin: 5rem 10rem;
+  }
 `
 
 export const Background = styled.div`
   flex: 1;
   background: url(${backgroundImg}) no-repeat center center;
-  background-size: cover;
+  background-size: cover; 
 `

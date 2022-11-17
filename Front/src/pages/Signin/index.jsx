@@ -1,42 +1,50 @@
-import { FiMail, FiLock } from "react-icons/fi"
+import { Container, Form, Background } from './styles'
 
-import { Link } from "react-router-dom"
+import { useState } from 'react'
+import { AiOutlineMail, AiFillLock} from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
-import { Container, Background } from "./styles"
-import { Button } from "../../components/Button"
-import { Input } from "../../components/Input"
+import { useAuth } from '../../hooks/auth'
 
-import { useAuth } from "../../hooks/auth"
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
 
-import { useState } from "react"
+export function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-export function Signin() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const { singIn } = useAuth()
 
-  const {signIn} = useAuth()
-
-  function handleSignIn() {
-    signIn({email, password})
+  function handleSingIn() {
+    singIn({ email, password })
   }
 
   return (
     <Container>
-      <div>
+      <Form>
         <h1>RocketMovies</h1>
         <p>Aplicação para acompanhar tudo que assistir.</p>
         <h2>Faça seu login</h2>
 
-        <form>
-          <Input placeholder={"E-mail"} icon={FiMail} onChange={e => setEmail(e.target.value)}/>
-          <Input placeholder={"Senha"} icon={FiLock} type="password" onChange={e => setPassword(e.target.value)}/>
-          <Button title={"Entrar"} onClick={handleSignIn}/>
-        </form>
+        <Input 
+          placeholder='E-mail'
+          icon={AiOutlineMail} 
+          type='text'
+          onChange={e => setEmail(e.target.value)} 
+        />
+        <Input 
+          placeholder='Senha'
+          icon={AiFillLock} 
+          type='password'
+          onChange={e => setPassword(e.target.value)} 
+        />
 
-        <Link to="/register" >Criar conta</Link>
-      </div>
+        <Button title='Entrar' onClick={handleSingIn}/>
 
-      <Background />
+        <Link to='/register'>Criar conta</Link>
+
+      </Form>
+      <Background/>
     </Container>
   )
 }

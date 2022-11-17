@@ -1,36 +1,53 @@
-import { Container, Profile } from "./styles";
-import { Input } from "../Input"
+import { Container, Profile, Button } from './styles'
 
-import { Link, useNavigate } from "react-router-dom";
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
-import { useAuth } from "../../hooks/auth";
+import { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import avatarPlaceHolder from "../../assets/avatar_placeholder.svg"
-import {api} from "../../services/api"
+import { useAuth } from '../../hooks/auth'
+import { MovieContext } from '../../hooks/movies'
 
-export function Header({onChange, ...rest}) {
-  const {signOut, user} = useAuth()
+import { api } from '../../services/api'
+import { Input } from '../Input'
 
-  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceHolder
+export function Header() {
+  const { fetchMovies } = useContext(MovieContext)
+  const [search, setSearch] = useState("")
 
-  const navigate = useNavigate()
+  const { signOut, user } = useAuth()
+  const navigation = useNavigate()
 
-  function handleClick() {
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
+
+  useEffect(() => {
+      fetchMovies(search)
+    }, [search])
+
+  function handleSignOut() {
+    navigation('/')
     signOut()
-    navigate("/")
   }
-  return (
-    <Container {...rest}>
-      <Link to={"/"}>RocketMovies</Link>
-      <Input placeholder={'Pesquisar pelo título'} onChange={onChange} />
 
-      <Profile>
+  return (
+    <Container>
+      <h1>RocketMovies</h1>
+      <Input 
+        placeholder='Pesquisar pelo título'
+        onChange={e => setSearch(e.target.value)}
+      />
+      <div>
         <div>
-          <Link to="/profile">{user.name}</Link>
-          <a onClick={handleClick}>sair</a>
+          <strong>{user.name}</strong>
+          <Button onClick={handleSignOut}>sair</Button>
         </div>
-        <img src={avatarURL} alt="Foto de perfil do usuário" />
-      </Profile>
+        <Profile to='/profile'>
+          <img 
+            src={avatarUrl}
+            alt={`Foto de ${user.name}`}
+          />
+        </Profile>
+      </div>    
     </Container>
   )
-}
+} 

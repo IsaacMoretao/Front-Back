@@ -1,34 +1,33 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
+  max-width: 63rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.COLORS.BG_INPUT2};
+  color: ${({ theme }) => theme.COLORS.GRAY_100};
+
+  border-radius: 1rem;
+
+  > input {
+    max-width: 63rem;
     width: 100%;
-    display: flex;
-    align-items: center;
+    height: 5.6rem;
 
-    background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
-    color: ${({theme}) => theme.COLORS.GREY_100};
+    padding: 1.9rem;
 
-    margin-bottom: 8px;
-    border-radius: 10px;
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
+    background-color: transparent;
+    border: 0;
 
-    > SVG {
-        margin-left: 16px;
-        color: ${({ theme }) => theme.COLORS.GREY_100};
+    &:placeholder{
+      color: ${({ theme }) => theme.COLORS.GRAY_100};
     }
-   > input {
-        height: 48px;
-        width: 100%;
+  }
 
-        padding: 12px;
-
-        color: ${({ theme }) => theme.COLORS.WHITE};
-        background: transparent;
-
-        border: 0;
-
-        &:placeholder {
-            color: ${({ theme }) => theme.COLORS.GREY_100};
-        }
+  > svg {
+      margin-left: 1.6rem;
     }
-
 `
